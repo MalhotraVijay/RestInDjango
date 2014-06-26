@@ -1,0 +1,6 @@
+*~
+*.pyc
+*.pyo
+/ssc/settings.py
+ssc/settings.py
+/ssc/settings.py~
