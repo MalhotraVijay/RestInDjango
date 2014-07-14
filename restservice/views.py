@@ -33,3 +33,17 @@ def restGETHandler(request,id):
 
 def landingRestHandler(request):
     return render_to_response('landing_rest.html',context_instance= RequestContext(request))
+
+
+
+def corsHandler(request):
+    print request
+    if request.method == "GET":
+        dictData = {'name':'john',
+                    'age':'33'}
+        jsonResponse = base.jsonResponse(dictData)
+        print jsonResponse
+        response = HttpResponse()
+        response.write(jsonResponse)
+        response['Access-Control-Allow-Origin'] = "http://localhost"
+        return response

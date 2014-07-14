@@ -1,11 +1,11 @@
 config = {
-    "templates" : "path/to/template_dir",
-    "media" : "path/to/media_dir" ,
-    "static": "path/to/static_dir" 
+    "templates" : "/home/vijay/other/projects/ssc-env/ssc/templates/",
+    "media" : "/home/vijay/other/projects/ssc-env/ssc/media/" ,
+    "static": "/home/vijay/other/projects/ssc-env/ssc/static/" 
     }
 
 databaseConfig = {
-    "name" : "dbname",
+    "name" : "test",
     "username" : "root",
-    "password" : "pass"
+    "password" : "vijay02"
     }

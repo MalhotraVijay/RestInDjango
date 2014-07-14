@@ -8,6 +8,7 @@ from django.conf import settings
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'restservice.views.landingRestHandler'),
+    url(r'^corsRequest$', 'restservice.views.corsHandler'),
     # url(r'^ssc/', include('ssc.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
