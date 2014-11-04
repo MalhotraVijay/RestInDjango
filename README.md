@@ -9,7 +9,7 @@ Setup details for django and python environment
 	virtualenv python2.7 mysql-server-core-5.5
 
 	pip install django==1.6
-
+	pip install MySQL-python
 	sudo apt-get install build-essential python-dev libmysqlclient-dev
 	sudo apt-get install python-mysqldb
 
