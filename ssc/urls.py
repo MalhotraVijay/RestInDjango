@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'restservice.views.landingRestHandler'),
     url(r'^corsRequest$', 'restservice.views.corsHandler'),
+    url(r'^sendDataToGoogle$', 'restservice.views.sendDataToGoogle'),
     # url(r'^ssc/', include('ssc.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from django.http import HttpResponse
-from baseutil import base
+from baseutil import base,appconfig
 from django.contrib.auth.models import User
 from django.core import serializers
 from django.shortcuts import render_to_response
@@ -38,7 +38,7 @@ def landingRestHandler(request):
 
 def corsHandler(request):
     print request
-    if request.method == "GET":
+    if request.method == "OPTIONS" or request.method == "GET":
         dictData = {'name':'john',
                     'age':'33'}
         jsonResponse = base.jsonResponse(dictData)
@@ -46,4 +46,53 @@ def corsHandler(request):
         response = HttpResponse()
         response.write(jsonResponse)
         response['Access-Control-Allow-Origin'] = "http://localhost"
+        response['Access-Control-Allow-Headers'] = "X-Requested-With"
         return response
+
+
+def sendDataToGoogle(request):
+    
+    if request.method == "OPTIONS" or request.method == "GET":
+
+       
+        dataObject = request.GET
+    
+        totalLength =  request.GET['objLength']
+        for i in range(0,int(totalLength)):
+            obj = {}
+            name = 'dataObject['+str(i)+'][url]'
+            obj['index'] = str(i)
+            obj['url'] = str(dataObject[name])
+            print obj 
+            sendFileInfo(obj)
+        response = HttpResponse()
+        #response.write(jsonResponse)
+        response['Access-Control-Allow-Origin'] = "http://localhost"
+        response['Access-Control-Allow-Headers'] = "X-Requested-With"
+        return response
+
+
+def sendFileInfo(obj):
+    import gdata.spreadsheet.service
+
+    client = gdata.spreadsheet.service.SpreadsheetsService() 
+    client.debug = True # feel free to toggle this 
+    client.email = appconfig.gappConfig['username'] 
+    client.password = appconfig.gappConfig['password']
+    client.source = 'some description' 
+    client.ProgrammaticLogin()
+
+
+    spreadsheet_key = '13tu3U-pd6isQQq8VDTv8JOFd4AnJWuhd9APYnCuzgTo'
+
+    worksheet_id = 'od6'
+
+    row = { "id": "1", "title": "second" }
+
+    print 'done'
+    client.InsertRow(obj, spreadsheet_key, worksheet_id)
+
+
+
+
+
