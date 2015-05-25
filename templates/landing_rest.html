@@ -1,0 +1,85 @@
+<html>
+
+<head>
+	<title> Login Page </title>
+        <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <link href="{{STATIC_URL}}css/mystyle.css" rel="stylesheet" />
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="/static/bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript" src="/static/js/main-javascript.js"></script>
+
+        <script type="text/javascript">
+
+        	$(document).ready(function(){
+
+        		var ssc = new SuccessAlignment();	/* Base javascript object of the complete frontend library system*/
+        		
+
+        		$("#sendRequestBtn").click(function(){
+
+        			var url = $("#urlName").val();
+        			//alert(url);
+
+        			var ajaxObject = {
+                    url : url, 
+                    data : '',
+                    type: "get",
+                    success : successCallback, 
+                    failure : failureCallback
+                }
+            
+                ssc.makeAjaxCall(ajaxObject);	/*Exposed internal API */
+                return false;
+        		});
+        		
+        	});
+
+        	var successCallback = function(response){
+        		alert(response);	// can do anything with the response that we get
+        	}
+
+        	var failureCallback = function(response){
+        		alert(response);	//can point the errors in a presentable way
+        	}
+
+        </script>
+</head>
+
+<body>
+
+	<div class="container-fluid"> 
+		<div class="row">
+				<nav class="navbar navbar-inverse" role="navigation">
+	  
+				</nav>
+		</div>
+		<div class="container">
+			<div class="row" >
+				
+				<div class="col-md-12">
+					<div class="form-layer">
+							<p> Rest urls that have been exposed: </p>
+							<p> GET URL : <b>http://localhost:8000/getUsers/user/{id} </b> </p>
+							<ul>
+								<li> 1.  If id == 0 the all then users are fetched </li>
+								<li> 1.  If id == anythingElse then specific user is fetched </li>
+							</ul>
+					</div>
+				</div>
+						
+			</div>
+			<div class="row" >
+				<div class="col-md-2" ></div>
+				<div class="col-md-8">
+					<div class="form-layer form=-group">
+							<input type="text" id="urlName" name="urlName" class="form-control" >
+							<br>
+							<input type="button" id="sendRequestBtn" value="Send Request" class="btn btn-warning" >
+					</div>
+				</div>
+				<div class="col-md-2"></div>		
+			</div>	
+		</div>
+	</div>
+</body>
+</html>
